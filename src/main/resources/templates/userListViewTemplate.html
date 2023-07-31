@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>My Friends</title>
+    <link rel="stylesheet" type="text/css" href="/styles_1.css">
+</head>
+<body>
+<div class="container">
+    <h1>My Connections</h1>
+    <ul>
+        <li th:each="user : ${userListView.users}" th:attr="data-userid=${user.id}"
+            onclick="redirectToUserDetails(this)">
+            <span th:text="${user.name}"></span>
+        </li>
+    </ul>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<script>
+    function redirectToUserDetails(row) {
+        const userId = row.getAttribute("data-userid");
+        showLoading();
+        window.location.href = "/user/" + userId;
+    }
+
+    function showLoading() {
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        loadingOverlay.style.display = "flex";
+    }
+
+    function hideLoading() {
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        loadingOverlay.style.display = "none";
+    }
+
+    window.addEventListener("load", () => {
+        hideLoading();
+    });
+</script>
+</body>
+</html>

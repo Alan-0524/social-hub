@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>User Posts</title>
+    <link rel="stylesheet" type="text/css" href="/styles_2.css">
+</head>
+<body>
+<div class="container">
+    <h1>User Profile - <span th:text="${userProfileView.user.name}"></span></h1>
+    <h2>User Posts</h2>
+    <ul>
+        <li th:each="postView : ${userProfileView.postViews}">
+            <h3 th:text="${postView.post.title}"></h3>
+            <p class="post-body" th:text="${postView.post.body}"></p>
+            <div class="post-comments">
+                <h4>Comments:</h4>
+                <ul th:if="${postView.comments}">
+                    <li th:each="comment : ${postView.comments}">
+                        <p><strong th:text="${comment.name}"></strong> - <span th:text="${comment.body}"></span></p>
+                    </li>
+                </ul>
+                <p th:unless="${postView.comments}">No comments available.</p>
+                <button class="back-button" onclick="goToHome()">Back to Home</button>
+            </div>
+        </li>
+    </ul>
+    <script>
+        function goToHome() {
+            window.location.href = "/users/";
+        }
+    </script>
+</div>
+</body>
+</html>

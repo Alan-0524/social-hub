@@ -1,0 +1,6 @@
+connector:
+  endpoint:
+    baseUrl: 'https://jsonplaceholder.typicode.com/'
+    userEndpoint: 'users/'
+    postEndpoint: 'posts/'
+    commentEndpoint: 'comments/'
